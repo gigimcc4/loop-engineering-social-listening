@@ -52,15 +52,17 @@ flowchart TD
 
 ## How the loop spends (and saves) tokens
 
-The point of loop engineering is putting the right engine on each step — so the cheap, validated tools do the grunt work for **zero tokens** and the LLM only shows up for strategy:
+The point of loop engineering is putting the right engine on each step — the cheap, validated tools do the grunt work for **zero tokens**, and the LLM shows up only for strategy. Here Granite runs **free** on your own GPU; the metering matters because that's the one step you'd actually pay for the moment you swap in a hosted model:
 
 | Step | Tool | Token cost |
 |---|---|---|
 | **Listen** — Bluesky + Hacker News (+ Reddit, optional) | open APIs | 0 |
 | **Sentiment** | VADER | 0 |
 | **Topics** | BERTopic | 0 |
-| **Interpret · find gaps · propose new signals** | IBM Granite | a little — *only here* |
+| **Interpret · find gaps · propose new signals** | IBM Granite | **free on your GPU\*** — the only step that uses the model *(the one you'd pay for if hosted)* |
 | **Deliver · ask what to watch next** | a Monday-morning email you can reply to | 0 |
+
+<sub>\* "Free" here means Google Colab's free **T4 GPU** — great for learning, but it has session time limits and daily quotas, so it *will* eventually stop you. If your own computer can run it, run Ollama + Granite **locally** (in VS Code or any Python setup) with no limits.</sub>
 
 The loop even **improves itself**: Granite proposes competitors it wasn't asked to track, the Monday email asks if you want them, and your reply widens next week's listening — self-improvement with a human gate.
 
